@@ -1,0 +1,14 @@
+{
+    "name": "Dev Container",
+    "dockerFile": "Dockerfile",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-toolsai.jupyter"
+			]
+		}
+	}
+    }
+}
