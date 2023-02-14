@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import sqlite3
 
-app = Flask(__name__, static_folder='/workspaces/cam_app/images')
+app = Flask(__name__, static_folder='/app/images')
 
 @app.route('/')
 def index():
@@ -16,4 +16,4 @@ def index():
     return render_template('index.html', data=data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

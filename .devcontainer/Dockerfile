@@ -29,7 +29,13 @@ RUN apt-get update && apt-get upgrade -y  && \
         python3 \
         python3-pip 
 
-RUN pip3 install --upgrade pip && pip3 install ipython ipykernel opencv-python==4.4.0.42 pillow
+RUN pip3 install --upgrade pip && \
+    pip3 install \
+        ipython \
+        ipykernel \
+        opencv-python==4.4.0.42 \
+        pillow \
+        flask
 
 RUN wget https://github.com/DanBloomberg/leptonica/archive/1.74.1.tar.gz
 RUN tar -xvzf 1.74.1.tar.gz
@@ -62,10 +68,12 @@ RUN make install
 WORKDIR /app/openalpr/src/bindings/python
 RUN python3 setup.py install
 
-# Copy the contents of the current directory into the container
-#COPY . .
-
 WORKDIR /app
 
+# Copy the contents of the current directory into the container
+COPY . .
+
+EXPOSE 5000
+
 # Set the default command to run when the container starts
-#CMD ["./run.sh"]
+CMD ["/bin/bash", "run.sh"]

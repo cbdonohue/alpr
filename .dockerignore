@@ -1,0 +1,7 @@
+# Ignore everything
+*
+
+!app.py
+!web.py
+!run.sh
+!templates/*
