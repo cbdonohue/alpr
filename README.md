@@ -1,4 +1,4 @@
-# alpr
+# Automatic License Plate Reader (ALPR) docker image for RTSP streams
 
 Build docker image from project root
 
