@@ -4,26 +4,30 @@ FROM ubuntu:18.04
 # Set the working directory
 WORKDIR /app
 
-# Update the package index and install the latest updates
-RUN apt-get update && apt-get upgrade -y
-
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ="America/New_York"
 
-# Install any additional packages you need
-RUN apt-get remove tesseract-ocr* -y
-RUN apt-get remove libleptonica-dev -y
-RUN apt-get autoclean -y
-RUN apt-get autoremove --purge -y
-RUN apt-get install libtool m4 automake cmake pkg-config -y
-RUN apt-get install libopencv-dev -y
-RUN apt-get install liblog4cplus-1.1-9 liblog4cplus-dev build-essential -y
-RUN apt-get install wget -y
-RUN apt-get install cmake -y
-RUN apt-get install git -y
-RUN apt-get install curl -y
-RUN apt-get install libcurl4-openssl-dev -y
-RUN apt-get install -y python3 python3-venv python3-pip
+# Update the package index and install the latest updates
+RUN apt-get update && apt-get upgrade -y  && \
+    apt-get remove tesseract-ocr* libleptonica-dev -y && \
+    apt-get autoclean -y && \
+    apt-get autoremove --purge -y && \
+    apt-get install -y \
+        libopencv-dev \
+        libtool \
+        m4 \
+        automake \
+        cmake \
+        pkg-config \
+        liblog4cplus-1.1-9 \
+        liblog4cplus-dev \
+        build-essential \
+        wget \
+        git \
+        curl \
+        libcurl4-openssl-dev \
+        python3 \
+        python3-pip 
 
 RUN pip3 install --upgrade pip && pip3 install ipython ipykernel opencv-python==4.4.0.42 pillow
 
