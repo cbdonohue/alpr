@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Table</title>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Plate</th>
+          <th>image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td><image src="images/{{ row[2] }}" width="800"/> </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

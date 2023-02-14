@@ -12,7 +12,7 @@ import os
 
 database_file = "images.db"
 
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
                     handlers=[logging.StreamHandler()])
 
@@ -88,6 +88,12 @@ def recognize_plate(frame, region='us'):
     for plate in results["results"]:
         logging.info("Plate: " + plate["plate"])
         logging.info("Confidence: " + str(plate["confidence"]))
+
+        coordinates = results["results"][0]["coordinates"]
+        # Draw a rectangle around the detected license plate
+        top_left = (coordinates[0]["x"], coordinates[0]["y"])
+        bottom_right = (coordinates[2]["x"], coordinates[2]["y"])
+        cv2.rectangle(frame, top_left, bottom_right, (0, 255, 0), 2)
 
         if plate["confidence"] > 80:
             add_image_to_database(database_file, frame, plate['plate'])
