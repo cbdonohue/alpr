@@ -16,5 +16,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          dockerfile: .devcontainer/Dockerfile
           push: false
-          tags: your-docker-image-name:latest
+          tags: cbdonohue/alpr:latest
