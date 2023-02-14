@@ -1,21 +1,29 @@
-name: Build Docker Image
+name: ci
+
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - 'master'
 
 jobs:
-  build:
+  docker:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Build Docker Image
-        uses: docker/build-push-action@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
         with:
-          context: .
-          dockerfile: .devcontainer/Dockerfile
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
           push: false
           tags: cbdonohue/alpr:latest
