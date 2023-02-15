@@ -112,8 +112,8 @@ while True:
     # Get the next frame from the queue
     frame = frame_queue.get()
 
-    # Create a thread pool with 4 threads
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+    # Create a thread pool
+    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
         # Submit 10 tasks to the thread pool
         executor.submit(worker, frame)
 
