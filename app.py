@@ -36,7 +36,7 @@ def add_image_to_database(database_file, image, plate):
     c.execute('CREATE TABLE IF NOT EXISTS images (time Text, plate TEXT, filename TEXT)')
 
     # Insert the image into the database
-    time = datetime.now().strftime("%m/%d/%Y %I:%M:%S %p")
+    time = datetime.now().isoformat()
     c.execute('INSERT INTO images VALUES (?, ?, ?)', (time, plate, filename))
 
     # Commit the transaction and close the connection
