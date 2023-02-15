@@ -9,6 +9,7 @@ import numpy as np
 from datetime import datetime
 import uuid
 import os
+import time, random
 
 database_file = "images.db"
 
@@ -49,7 +50,7 @@ cap = cv2.VideoCapture(rtsp_url)
 cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
 # Set up a thread-safe queue to hold the captured frames
-frame_queue = queue.Queue(maxsize=20)
+frame_queue = queue.Queue(maxsize=10)
 
 # Define a function to capture frames and add them to the queue
 def capture_frames():
@@ -68,9 +69,6 @@ def capture_frames():
             frame_queue.put_nowait(frame)
         except queue.Full:
             pass
-
-        # Wait for one second before capturing the next frame
-        cv2.waitKey(1000)
 
 def copy_image(src_file, dst_file):
     shutil.copy(src_file, dst_file)
