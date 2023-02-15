@@ -58,7 +58,7 @@ def capture_frames():
         ret, frame = cap.read()
         if not ret:
             print("Failed to capture frame from stream")
-            cap = cv2.VideoCapture(rtsp_url)
+            cap = cv2.VideoCapture(os.getenv("RTSP_STREAM"))
             cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
             continue
      
