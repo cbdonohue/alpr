@@ -1,12 +1,12 @@
 from flask import Flask, render_template
-import sqlite3
+import sqlite3, os
 
-app = Flask(__name__, static_folder='/app/images')
+app = Flask(__name__, static_folder='/app/data')
 
 @app.route('/')
 def index():
     # Connect to the database and execute a query
-    conn = sqlite3.connect('images.db')
+    conn = sqlite3.connect(os.path.join('data','images.db'))
     c = conn.cursor()
     c.execute('SELECT * FROM images')
     data = c.fetchall()

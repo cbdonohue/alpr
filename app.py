@@ -26,10 +26,10 @@ def add_image_to_database(database_file, image, plate):
     # Create a filename with the UUID
     filename = f"{plate}_{unique_id}.jpg"
 
-    cv2.imwrite(os.path.join('images', filename), image)
+    cv2.imwrite(os.path.join('data', filename), image)
 
     # Connect to the database
-    conn = sqlite3.connect(database_file)
+    conn = sqlite3.connect(os.path.join('data', database_file))
     c = conn.cursor()
 
     # Create the table if it does not already exist
