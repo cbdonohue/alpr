@@ -9,6 +9,7 @@ import numpy as np
 from datetime import datetime
 import uuid
 import os
+import concurrent.futures
 
 database_file = "images.db"
 
@@ -103,12 +104,18 @@ thread = threading.Thread(target=capture_frames)
 thread.daemon = True
 thread.start()
 
+def worker(frame):
+    recognize_plate(frame)
+
 # Process frames from the queue
 while True:
     # Get the next frame from the queue
     frame = frame_queue.get()
 
-    recognize_plate(frame)
+    # Create a thread pool with 4 threads
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        # Submit 10 tasks to the thread pool
+        executor.submit(worker, frame)
 
     logging.debug('queue size ' + str(frame_queue.qsize()))
 
