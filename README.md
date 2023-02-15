@@ -6,4 +6,4 @@ Build docker image from project root
 
 or use the prebuilt docker image from dockerhub
 
-`docker run -it --rm -p 5000:5000 -v /home/chris/cam_app/data:/app/data -v /home/chris/cam_app/images.db:/app/images.db cbdonohue/alpr:latest`
+`docker run -it --rm -p 5000:5000 -v /home/chris/cam_app/data:/app/data cbdonohue/alpr:latest`
