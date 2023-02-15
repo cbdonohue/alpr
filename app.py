@@ -1,3 +1,4 @@
+import contextlib
 import cv2
 import queue
 import threading
@@ -62,12 +63,10 @@ def capture_frames():
             cap = cv2.VideoCapture(os.getenv("RTSP_STREAM"))
             cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
             continue
-     
+
         # Add the current frame to the queue
-        try:
+        with contextlib.suppress(queue.Full):
             frame_queue.put_nowait(frame)
-        except queue.Full:
-            pass
 
 def copy_image(src_file, dst_file):
     shutil.copy(src_file, dst_file)
@@ -117,6 +116,6 @@ while True:
         # Submit 10 tasks to the thread pool
         executor.submit(worker, frame)
 
-    logging.debug('queue size ' + str(frame_queue.qsize()))
+    logging.debug(f'queue size {str(frame_queue.qsize())}')
 
 cap.release()
