@@ -9,7 +9,6 @@ import numpy as np
 from datetime import datetime
 import uuid
 import os
-import time, random
 
 database_file = "images.db"
 
@@ -45,8 +44,7 @@ def add_image_to_database(database_file, image, plate):
     conn.close()
 
 # Set up the video capture from an RTSP stream
-rtsp_url = "rtsp://192.168.1.202:554/11"
-cap = cv2.VideoCapture(rtsp_url)
+cap = cv2.VideoCapture(os.getenv("RTSP_STREAM"))
 cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
 # Set up a thread-safe queue to hold the captured frames

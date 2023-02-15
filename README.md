@@ -6,4 +6,6 @@ Build docker image from project root
 
 or use the prebuilt docker image from dockerhub
 
-`docker run -it --rm -p 5000:5000 -v /home/chris/cam_app/data:/app/data cbdonohue/alpr:latest`
+'docker run -it --rm -p 5000:5000 -v /home/chris/cam_app/data:/app/data -e RTSP_STREAM="rtsp://192.168.1.202:554/11" cbdonohue/alpr:latest'
+
+Images and database will be saved in the volume mounted to `/app/data` in the container.
