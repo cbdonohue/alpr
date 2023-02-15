@@ -4,7 +4,7 @@ Build docker image from project root
 
 `docker build . -t cbdonohue/alpr:latest -f .devcontainer/Dockerfile`
 
-or use the prebuilt docker image from [dockerhub](https://hub.docker.com/repository/docker/cbdonohue/alpr/general_
+or use the prebuilt docker image from [dockerhub](https://hub.docker.com/repository/docker/cbdonohue/alpr/general)
 
 How to run
 
