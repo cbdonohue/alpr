@@ -76,4 +76,5 @@ COPY . .
 EXPOSE 5000
 
 # Set the default command to run when the container starts
+ENV RTSP_STREAM="rtsp://192.168.1.202:554/11"
 CMD ["/bin/bash", "run.sh"]
